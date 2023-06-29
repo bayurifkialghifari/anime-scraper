@@ -11,6 +11,7 @@ class OtakuDesu {
     })
   }
 
+  // Get ongoing anime
   async ongoing(page = 0) {
     let url = '/ongoing-anime'
     if (page) {
@@ -21,30 +22,50 @@ class OtakuDesu {
       .get(url)
       .then(response => response.data)
       .then(data => {
-        const $ = cheerio.load(data)
-        const ongoing = []
-        // const pageAvailable = []
-        // const pageActive = $('.current').text()
-        $('.venz').each((i, el) => {
-          $(el).find('ul').each((i2, el2) => {
-            $(el2).find('li').each((i3, el3) => {
-              const title = $(el3).find('h2').text()
-              const episode = $(el3).find('.epz').text()
-              const link = $(el3).find('a').attr('href')
-              const image = $(el3).find('img').attr('src')
-
-              ongoing.push({
-                title,
-                episode,
-                link,
-                image
-              })
-            })
-          })          
-        })
-
-        return ongoing
+        return this.parseData(data)
       })
+  }
+
+  // Get complete anime
+  async complete(page = 0) {
+    let url = '/complete-anime'
+    if (page) {
+      url = '/complete-anime/page/' + page
+    }
+
+    return this.client
+      .get(url)
+      .then(response => response.data)
+      .then(data => {
+        return this.parseData(data)
+      })
+  }
+
+  // Parse data 
+  async parseData(data) {
+    const $ = cheerio.load(data)
+    const parseData = [] 
+    // const pageAvailable = []
+    // const pageActive = $('.current').text()
+    $('.venz').each((i, el) => {
+      $(el).find('ul').each((i2, el2) => {
+        $(el2).find('li').each((i3, el3) => {
+          const title = $(el3).find('h2').text()
+          const episode = $(el3).find('.epz').text()
+          const link = $(el3).find('a').attr('href').replace(destination.otakudesu, '')
+          const image = $(el3).find('img').attr('src').replace(destination.otakudesu, '')
+
+          parseData.push({
+            title,
+            episode,
+            link,
+            image
+          })
+        })
+      })          
+    })
+
+    return parseData
   }
 }
 

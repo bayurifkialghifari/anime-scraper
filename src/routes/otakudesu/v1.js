@@ -4,5 +4,6 @@ const router = express.Router();
 const otakudesu = require('../../handler/http/api/v1/otakudesu');
 
 router.get('/ongoing', otakudesu.ongoing);
+router.get('/complete', otakudesu.complete);
 
 module.exports = router;
