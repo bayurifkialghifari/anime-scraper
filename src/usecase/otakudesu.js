@@ -2,6 +2,7 @@ const axios = require('axios');
 const destination = require('../config/destination');
 const cheerio = require('cheerio');
 const { on } = require('nodemon');
+const e = require('cors');
 
 class OtakuDesu {
   constructor() {
@@ -50,7 +51,23 @@ class OtakuDesu {
       .get(url)
       .then(response => response.data)
       .then(data => {
-        return data
+        const $ = cheerio.load(data)
+        const episode = []
+
+        $('.episodelist').each((i, el) => {
+          $(el).find('ul').each((i2, el2) => {
+            $(el2).find('li').each((i3, el3) => {
+              const title = $(el3).find('a').text()
+              const link = $(el3).find('a').attr('href').replace(destination.otakudesu, '')
+              episode.push({
+                title,
+                link
+              })
+            })
+          })
+        })
+        
+        return episode
       })
   }
 
