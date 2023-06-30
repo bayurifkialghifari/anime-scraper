@@ -43,6 +43,17 @@ class OtakuDesu extends HTTPBaseHandler {
         return super.badRequest(res, err.message)
       })
   }
+
+  // Episode anime
+  episode(req, res) {
+    return OtakuDesuService.episode(req)
+      .then(data => {
+        return super.successResponse(res, 'Success!', data)
+      })
+      .catch(err => {
+        return super.badRequest(res, err.message)
+      })
+  }
 }
 
 module.exports = new OtakuDesu()

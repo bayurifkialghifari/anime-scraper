@@ -71,6 +71,20 @@ class OtakuDesu {
       })
   }
 
+  // Episode anime
+  async episode(req) {
+    const { detail } = req.params
+    const url = '/episode/' + detail
+
+    return this.client
+      .get(url)
+      .then(response => response.data)
+      .then(data => {
+        return data
+      })
+  }
+    
+
   // Parse data 
   async parseData(data) {
     const $ = cheerio.load(data)
