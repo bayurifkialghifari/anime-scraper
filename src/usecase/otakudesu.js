@@ -42,6 +42,35 @@ class OtakuDesu {
       })
   }
 
+  // Search anime
+  async search(req) {
+    const { s } = req.query
+    const url = '/?s=' + s + '&post_type=anime'
+
+    return this.client
+      .get(url)
+      .then(response => response.data)
+      .then(data => {
+        const $ = cheerio.load(data)
+        const search = []
+
+        $('.chivsrc').find('li').each((i, el) => {
+          const title = $(el).find('a').text()
+          const link = $(el).find('a').attr('href').replace(destination.otakudesu, '')
+          const image = $(el).find('img').attr('src')
+
+
+          search.push({
+            title,
+            link,
+            image
+          })
+        })
+
+        return search
+      })
+  }
+
   // Detail anime
   async detail(req) {
     const { detail } = req.params
