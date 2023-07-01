@@ -53,6 +53,17 @@ class OtakuDesu {
       .then(data => {
         const $ = cheerio.load(data)
         const episode = []
+        const detail = {
+          fotonime: $(".venser").find(".fotoanime img").attr("src"),
+          judul: $(".venser").find(".infozingle p").first().text(),
+          skor: $(".venser").find(".infozingle p:nth-child(3)").text(),
+          produser: $(".venser").find(".infozingle p:nth-child(4)").text(),
+          status: $(".venser").find(".infozingle p:nth-child(6)").text(),
+          totaleps: $(".venser").find(".infozingle p:nth-child(7)").text(),
+          studio: $(".venser").find(".infozingle p:nth-child(10)").text(),
+          genre: $(".venser").find(".infozingle p:nth-child(11)").text(),
+          sinopsis: $(".venser").find(".sinopc").text(),
+        }
 
         $('.episodelist').each((i, el) => {
           $(el).find('ul').each((i2, el2) => {
@@ -67,7 +78,10 @@ class OtakuDesu {
           })
         })
         
-        return episode
+        return {
+          detail,
+          episode
+        }
       })
   }
 
@@ -79,8 +93,18 @@ class OtakuDesu {
     return this.client
       .get(url)
       .then(response => response.data)
-      .then(data => {
-        return data
+      .then(async data => {
+        const $ = cheerio.load(data)
+
+        const title = $(".venser").find(".posttl").text()
+        const link_string = $(".responsive-embed-stream iframe").attr("src")
+        const download = $(".venser").find(".download ul").html()
+          
+        return {
+          title,
+          link_string,
+          download
+        }
       })
   }
     
