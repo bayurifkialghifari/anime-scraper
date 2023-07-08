@@ -19,7 +19,8 @@
     "joi": "^17.6.0",
     "moment": "^2.29.2",
     "morgan": "~1.9.1",
-    "sequelize": "^6.18.0"
+    "sequelize": "^6.18.0",
+    "simple-update-notifier": "^2.0.0"
   },
   "devDependencies": {
     "dotenv": "^16.0.0",
