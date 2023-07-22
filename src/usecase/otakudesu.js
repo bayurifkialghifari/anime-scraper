@@ -1,8 +1,6 @@
 const axios = require('axios');
 const destination = require('../config/destination');
 const cheerio = require('cheerio');
-const { on } = require('nodemon');
-const e = require('cors');
 
 class OtakuDesu {
   constructor() {
