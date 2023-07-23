@@ -1,8 +1,6 @@
 const axios = require('axios');
 const destination = require('../config/destination');
 const cheerio = require('cheerio');
-const { on } = require('nodemon');
-const e = require('cors');
 
 class OtakuDesu {
   constructor() {
@@ -151,12 +149,14 @@ class OtakuDesu {
           const episode = $(el3).find('.epz').text()
           const link = $(el3).find('a').attr('href').replace(destination.otakudesu, '')
           const image = $(el3).find('img').attr('src')
+          const rating = $(el3).find('.epztipe').text().replace(' ', '')
 
           parseData.push({
             title,
             episode,
             link,
-            image
+            image,
+            rating
           })
         })
       })          
