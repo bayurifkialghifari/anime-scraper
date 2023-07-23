@@ -150,7 +150,7 @@ class OtakuDesu {
           const title = $(el3).find('h2').text()
           const episode = $(el3).find('.epz').text()
           const link = $(el3).find('a').attr('href').replace(destination.otakudesu, '')
-          const image = $(el3).find('img').attr('src').replace(destination.otakudesu, '')
+          const image = $(el3).find('img').attr('src')
 
           parseData.push({
             title,
