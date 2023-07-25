@@ -82,13 +82,16 @@ class OtakuDesu {
         const episode = []
         const detail = {
           fotonime: $(".venser").find(".fotoanime img").attr("src"),
-          judul: $(".venser").find(".infozingle p").first().text(),
-          skor: $(".venser").find(".infozingle p:nth-child(3)").text(),
-          produser: $(".venser").find(".infozingle p:nth-child(4)").text(),
-          status: $(".venser").find(".infozingle p:nth-child(6)").text(),
-          totaleps: $(".venser").find(".infozingle p:nth-child(7)").text(),
-          studio: $(".venser").find(".infozingle p:nth-child(10)").text(),
-          genre: $(".venser").find(".infozingle p:nth-child(11)").text(),
+          judul: $(".venser").find(".infozingle p").first().text().replace('Judul: ', ''),
+          jepang: $(".venser").find(".infozingle p:nth-child(2)").text().replace('Japanese: ', ''),
+          skor: $(".venser").find(".infozingle p:nth-child(3)").text().replace('Skor: ', ''),
+          produser: $(".venser").find(".infozingle p:nth-child(4)").text().replace('Produser: ', ''),
+          status: $(".venser").find(".infozingle p:nth-child(6)").text().replace('Status: ', ''),
+          totaleps: $(".venser").find(".infozingle p:nth-child(7)").text().replace('Total Episode: ', ''),
+          durasi: $(".venser").find(".infozingle p:nth-child(8)").text().replace('Durasi: ', ''),
+          tanggalrilis: $(".venser").find(".infozingle p:nth-child(9)").text().replace('Tanggal Rilis: ', ''),
+          studio: $(".venser").find(".infozingle p:nth-child(10)").text().replace('Studio: ', ''),
+          genre: $(".venser").find(".infozingle p:nth-child(11)").text().replace('Genre: ', ''),
           sinopsis: $(".venser").find(".sinopc").text(),
         }
 
