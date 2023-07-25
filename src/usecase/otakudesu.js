@@ -99,15 +99,17 @@ class OtakuDesu {
           $(el).find('ul').each((i2, el2) => {
             $(el2).find('li').each((i3, el3) => {
               const title = $(el3).find('a').text()
+              const tanggal = $(el3).find('.zeebr').text()
               const link = $(el3).find('a').attr('href').replace(destination.otakudesu, '')
               episode.push({
                 title,
+                tanggal,
                 link
               })
             })
           })
         })
-        
+
         return {
           detail,
           episode
@@ -129,7 +131,7 @@ class OtakuDesu {
         const title = $(".venser").find(".posttl").text()
         const link_string = $(".responsive-embed-stream iframe").attr("src")
         const download = $(".venser").find(".download ul").html()
-          
+
         return {
           title,
           link_string,
@@ -137,12 +139,12 @@ class OtakuDesu {
         }
       })
   }
-    
 
-  // Parse data 
+
+  // Parse data
   async parseData(data) {
     const $ = cheerio.load(data)
-    const parseData = [] 
+    const parseData = []
     // const pageAvailable = []
     // const pageActive = $('.current').text()
     $('.venz').each((i, el) => {
@@ -162,7 +164,7 @@ class OtakuDesu {
             rating
           })
         })
-      })          
+      })
     })
 
     return parseData
