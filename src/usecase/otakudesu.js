@@ -101,11 +101,15 @@ class OtakuDesu {
               const title = $(el3).find('a').text()
               const tanggal = $(el3).find('.zeebr').text()
               const link = $(el3).find('a').attr('href').replace(destination.otakudesu, '')
-              episode.push({
-                title,
-                tanggal,
-                link
-              })
+
+              // Ignore link lengkap :D
+              if (!link.includes('lengkap')) {
+                episode.push({
+                  title,
+                  tanggal,
+                  link
+                })
+              }
             })
           })
         })
@@ -129,13 +133,29 @@ class OtakuDesu {
         const $ = cheerio.load(data)
 
         const title = $(".venser").find(".posttl").text()
-        const link_string = $(".responsive-embed-stream iframe").attr("src")
         const download = $(".venser").find(".download ul").html()
+        const link_string = $(".responsive-embed-stream iframe").attr("src")
+        const link_all_eps = $(".venser").find('.flir').find('a').filter(function() {
+          return $(this).text().trim() === 'See All Episodes'
+        }).attr('href').replace(destination.otakudesu, '')
+        let next_eps = $(".venser").find('.flir').find('a').filter(function() {
+          return $(this).text().trim() === 'Next Eps.'
+        }).attr('href')
+        let prev_eps = $(".venser").find('.flir').find('a').filter(function() {
+          return $(this).text().trim() === 'Previous Eps.'
+        }).attr('href')
+
+        // Check next and prev eps button
+        next_eps = next_eps ? next_eps.replace(destination.otakudesu, '') : false
+        prev_eps = prev_eps ? prev_eps.replace(destination.otakudesu, '') : false
 
         return {
           title,
+          download,
           link_string,
-          download
+          link_all_eps,
+          next_eps,
+          prev_eps
         }
       })
   }
