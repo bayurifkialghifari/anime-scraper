@@ -56,12 +56,19 @@ class OtakuDesu {
           const title = $(el).find('a').text()
           const link = $(el).find('a').attr('href').replace(destination.otakudesu, '')
           const image = $(el).find('img').attr('src')
+          let rating = ''
+          $(el).find('.set').each((i2, el2) => {
+            if ($(el2).text().includes('Rating : ')) {
+              rating = $(el2).text().replace('Rating : ', '')
+            }
+          })
 
 
           search.push({
             title,
             link,
-            image
+            image,
+            rating
           })
         })
 
