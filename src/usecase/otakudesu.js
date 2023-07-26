@@ -133,7 +133,7 @@ class OtakuDesu {
         const $ = cheerio.load(data)
 
         const title = $(".venser").find(".posttl").text()
-        const download = $(".venser").find(".download ul").html()
+        const link_download = {}
         const link_string = $(".responsive-embed-stream iframe").attr("src")
         const link_all_eps = $(".venser").find('.flir').find('a').filter(function() {
           return $(this).text().trim() === 'See All Episodes'
@@ -149,9 +149,23 @@ class OtakuDesu {
         next_eps = next_eps ? next_eps.replace(destination.otakudesu, '') : false
         prev_eps = prev_eps ? prev_eps.replace(destination.otakudesu, '') : false
 
+        // Get link download
+        $(".venser").find(".download ul").find('li').each((i, el) => {
+          link_download[$(el).find('strong').text()] = []
+
+          $(el).find('a').each((i2, el2) => {
+            link_download[$(el).find('strong').text()].push({
+              name: $(el).find('strong').text() + ' ' + $(el2).text(),
+              link: $(el2).attr('href'),
+            })
+          })
+        })
+
+
+
         return {
           title,
-          download,
+          link_download,
           link_string,
           link_all_eps,
           next_eps,
