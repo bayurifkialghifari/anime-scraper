@@ -53,7 +53,7 @@ class OtakuDesu {
         const search = []
 
         $('.chivsrc').find('li').each((i, el) => {
-          const title = $(el).find('a').text()
+          const title = $(el).find('a').html()
           const link = $(el).find('a').attr('href').replace(destination.otakudesu, '')
           const image = $(el).find('img').attr('src')
           let rating = ''
