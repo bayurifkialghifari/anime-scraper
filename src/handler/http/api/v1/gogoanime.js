@@ -47,6 +47,17 @@ class GogoAnime extends HTTPBaseHandler {
         return super.badRequest(res, err.message)
       })
   }
+
+  // Get anime detail
+  detail(req, res) {
+    return GogoAnimeService.detail(req.params.slug)
+      .then(data => {
+        return super.successResponse(res, 'Success!', data)
+      })
+      .catch(err => {
+        return super.badRequest(res, err.message)
+      })
+  }
 }
 
 module.exports = new GogoAnime()
