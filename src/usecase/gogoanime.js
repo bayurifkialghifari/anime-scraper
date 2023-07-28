@@ -23,8 +23,8 @@ class GogoAnime {
   }
 
   // Movies
-  async movies(page = 1) {
-    let url = '/anime-movies.html?page=' + page
+  async movies(page = 1, aph = '') {
+    let url = '/anime-movies.html?aph='+aph+'&page=' + page
 
     return this.client
       .get(url)
