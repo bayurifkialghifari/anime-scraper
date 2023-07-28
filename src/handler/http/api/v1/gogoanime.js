@@ -3,7 +3,7 @@ const {HTTPBaseHandler} = require('@nandev/ndk');
 const GogoAnimeService = require('../../../../usecase/gogoanime');
 
 class GogoAnime extends HTTPBaseHandler {
-
+  
   // Get ongoing anime
   ongoing(req, res) {
     return GogoAnimeService.ongoing(req.query.page ?? 1)
@@ -17,7 +17,7 @@ class GogoAnime extends HTTPBaseHandler {
 
   // Get anime movies
   movies(req, res) {
-    return GogoAnimeService.movies(req.query.page ?? 1)
+    return GogoAnimeService.movies(req.query.page ?? 1, req.query.aph ?? '')
       .then(data => {
         return super.successResponse(res, 'Success!', data)
       })
