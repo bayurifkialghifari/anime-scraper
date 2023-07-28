@@ -36,6 +36,17 @@ class GogoAnime extends HTTPBaseHandler {
         return super.badRequest(res, err.message)
       })
   }
+
+  // Search anime
+  search(req, res) {
+    return GogoAnimeService.search(req.query.page ?? 1, req.query.s ?? '')
+      .then(data => {
+        return super.successResponse(res, 'Success!', data)
+      })
+      .catch(err => {
+        return super.badRequest(res, err.message)
+      })
+  }
 }
 
 module.exports = new GogoAnime()

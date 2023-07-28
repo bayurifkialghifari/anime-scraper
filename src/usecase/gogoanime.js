@@ -46,6 +46,18 @@ class GogoAnime {
       })
   }
 
+  // Search
+  async search(page = 1, s = '') {
+    let url = '/search.html?keyword='+s+'&page=' + page
+
+    return this.client
+      .get(url)
+      .then(response => response.data)
+      .then(data => {
+        return this.parseData(data)
+      })
+  }
+
   // Parse data
   async parseData(data) {
     const $ = cheerio.load(data)
