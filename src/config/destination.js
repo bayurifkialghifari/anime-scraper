@@ -1,4 +1,4 @@
 module.exports = {
-  otakudesu: 'https://otakudesu.media',
+  otakudesu: 'https://otakudesu.cloud',
   gogoanime: 'https://gogoanimehd.to/',
 }
